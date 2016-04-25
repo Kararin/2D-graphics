@@ -4,18 +4,26 @@ export default (state = {
         height: 800
     },
     step: 20,
-    begin: 0.5
+    begin: 0.5,
+    center: {
+        x: 1000 / 2,
+        y: 800 / 2
+    }
 }, action) => {
     var actions = {
         'SET_SIZE': () => {
             return Object.assign({}, state, {
                 width: action.width,
-                height: action.height
+                height: action.height,
+                center: {
+                    x: action.width / 2,
+                    y: action.height / 2
+                }
             });
         },
         'SET_STEP': () => {
             return Object.assign({}, state, {
-                size: action.size
+                step: action.step
             });
         },
         'SET_BEGIN': () => {

@@ -1,0 +1,1 @@
+export const setPosition = (x, y) => ({type: 'SET_POINT_POSITION', x, y});

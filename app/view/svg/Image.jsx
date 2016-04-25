@@ -1,25 +1,42 @@
 import React from 'react';
+import HorizontalBase from '../../container/svg/HorizontalBase';
+import VerticalBase from '../../container/svg/VerticalBase';
+import UpDoor from '../../container/svg/UpDoor';
+import DownDoor from '../../container/svg/DownDoor';
+import SmallPipe from '../../container/svg/SmallPipe';
+import BigPipe from '../../container/svg/BigPipe';
+import LeftWheel from '../../container/svg/LeftWheel';
+import RightWheel from '../../container/svg/RightWheel';
+import Point from '../../container/svg/Point';
 
 export default ({
     width,
     height,
-    rect,
-    center,
-    step
+    clickAction
 }) => (
     <svg
         width = {width}
         height = {height}
-        className = 'my-canvas'>
+        className = 'my-canvas'
+        onDoubleClick = {(e) => {
+            var svg = document.querySelector('svg'),
+                pt = svg.createSVGPoint(),
+                points;
 
-        <rect
-            x = {center.x + rect.x * step}
-            y = {center.y - rect.y * step}
-            width = {rect.width * step}
-            height = {rect.height * step}
-            style = {{
-                stroke: rect.stroke,
-                fill: 'none'
-            }}/>
+            pt.x = e.clientX; pt.y = e.clientY;
+            points = pt.matrixTransform(svg.getScreenCTM().inverse());
+
+            clickAction(points.x, points.y);
+        }}>
+
+        <HorizontalBase/>
+        <VerticalBase/>
+        <UpDoor/>
+        <DownDoor/>
+        <SmallPipe/>
+        <BigPipe/>
+        <LeftWheel/>
+        <RightWheel/>
+        <Point/>
     </svg>
 );

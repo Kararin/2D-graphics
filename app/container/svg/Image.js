@@ -1,10 +1,11 @@
 import {connect} from 'react-redux';
 import Image from '../../view/svg/Image';
+import {setPosition} from '../../actions/point';
+
 
 const mapStateToProps = (state) => {
     var {width, height} = state.common.size,
         {step} = state.common,
-        {rect} = state.svg,
         center = {
             x: width / 2,
             y: height / 2
@@ -13,10 +14,17 @@ const mapStateToProps = (state) => {
     return {
         width,
         height,
-        rect,
         center,
         step
     };
 };
 
-export default connect(mapStateToProps)(Image);
+const mapPropsToState = (dispatch) => {
+    return {
+        clickAction: (x, y) => {
+            dispatch(setPosition(x, y));
+        }
+    };
+};
+
+export default connect(mapStateToProps, mapPropsToState)(Image);

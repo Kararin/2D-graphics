@@ -1,19 +1,17 @@
 import {connect} from 'react-redux';
 import ButtonChangeX from '../view/ButtonChangeX';
-import {setRectX} from '../actions/svg/rect';
 
-const mapStateToProps = ({svg}) => {
-    var {x} = svg.rect;
+const mapStateToProps = () => {
+    // var {x} = svg.rect;
 
     return {
-        x
+        // x
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
         return {
             changeX: (x) => {
-                dispatch(setRectX(x));
             },
         };
 };
