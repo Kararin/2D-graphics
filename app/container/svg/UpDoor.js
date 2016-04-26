@@ -2,45 +2,21 @@ import {
     connect
 } from 'react-redux';
 import Base from '../../view/svg/Rect';
-import {toggleEdited} from '../../actions/shapes';
+import {baseMapState, baseMapProps} from './RectBase';
 
 const mapStateToProps = ({
-    shapes,
-    common
-}) => {
-    var {
-        upDoor,
-        edited
-    } = shapes, {
-        x,
-        y,
-        height,
-        width
-    } = upDoor, {
-        center,
-        step
-    } = common,
-        scaledX = center.x + x * step,
-        scaledY = center.y - y * step,
-        scaledHeight = height * step,
-        scaledWidth = width * step;
+    shapes: {upDoor, edited},
+    common}) => {
 
-    return {
-        x: scaledX,
-        y: scaledY,
-        height: scaledHeight,
-        width: scaledWidth,
-        selected: edited.has('upDoor')
-    };
+    return baseMapState({
+        common,
+        shape: upDoor,
+        edited,
+        shapeName: 'upDoor'});
 };
 
-
 const mapPropsToState = (dispatch) => {
-    return {
-        toggleEdited: () => {
-            dispatch(toggleEdited('upDoor'));
-        }
-    };
+    return baseMapProps(dispatch, 'upDoor');
 };
 
 export default connect(mapStateToProps, mapPropsToState)(Base);
