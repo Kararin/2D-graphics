@@ -1,51 +1,53 @@
 import {Set} from 'immutable';
 
 export default (state = {
-    verBase: {
+    verBase: createRect({
         width: 4,
         height: 6,
         x: 10,
-        y: 6
-    },
-    horBase: {
+        y: 6,
+    }),
+    horBase: createRect({
         width: 6,
         height: 3,
         x: 4,
         y: 3
-    },
-    upDoor: {
+    }),
+    upDoor: createRect({
         width: 2,
         height: 2,
         x: 11,
         y: 5
-    },
-    downDoor: {
+    }),
+    downDoor: createRect({
         width: 2,
         height: 3,
         x: 11,
         y: 3
-    },
-    smallPipe: {
+    }),
+    smallPipe: createRect({
         width: 1,
         height: 2,
         x: 7,
         y: 5
-    },
-    bigPipe: {
+    }),
+    bigPipe: createRect({
         width: 1,
         height: 3,
         x: 5,
         y: 6
-    },
+    }),
     leftWheel: {
         x: 6,
         y: -0.5,
-        radius: 1
+        radius: 1,
+        scale: 1
     },
     rightWheel: {
         x: 12,
         y: -0.5,
-        radius: 1
+        radius: 1,
+        scale: 1
     },
     edited: Set()
 }, action) => {
@@ -75,6 +77,21 @@ export default (state = {
                     edited.delete(shapeName) :
                     edited.add(shapeName)
             });
+        },
+        CHANGE_X: () => {
+            var shapesArray = changeInArray(state, action, 'x');
+
+            return Object.assign({}, state, ...shapesArray);
+        },
+        CHANGE_Y: () => {
+            var shapesArray = changeInArray(state, action, 'y');
+
+            return Object.assign({}, state, ...shapesArray);
+        },
+        CHANGE_SCALE: () => {
+            var shapesArray = changeInArray(state, action, 'scale');
+
+            return Object.assign({}, state, ...shapesArray);
         }
     },
         result = state;
@@ -85,3 +102,25 @@ export default (state = {
 
     return result;
 };
+
+const changeInArray = (state, action, attrib) => {
+    var newShapes = state.edited.map(shapeName => {
+        var shape = state[shapeName];
+
+        return {
+            [shapeName]: Object.assign({}, shape, {
+                [attrib]: shape[attrib] + action.step
+            }
+        )};
+    });
+
+    return newShapes.toArray();
+};
+
+const createRect = ({x, y, width, height, scale}) => ({
+    x,
+    y,
+    width: width,
+    height: height,
+    scale: scale || 1
+});

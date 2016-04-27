@@ -5,18 +5,18 @@ const Rect = ({
     radius,
     toggleEdited,
     selected,
-    style
+    style,
+    scale
 }) => {
     var newStyle = Object.assign({}, style,
         {strokeWidth: selected ? '2px' : '0.5px'});
 
     return (
         <circle
-            cx = {x}
-            cy = {y}
             r = {radius}
             style = {newStyle}
             onClick = {() => {toggleEdited()}}
+            transform = {`matrix(${scale},0,0, ${scale}, ${x}, ${y})`}
         />
     )
 };
@@ -28,6 +28,7 @@ Rect.defaultProps = {
         fill: 'grey',
         fillOpacity: 0.4
     },
+    scale: 1,
     toggleEdited: console.log(' not implemented')
 }
 

@@ -6,7 +6,6 @@ import Buttons from '../RectButtons';
 
 export default () => (
     <div>
-        <Buttons/>
         <Field/>
         <Axis/>
         <Image/>

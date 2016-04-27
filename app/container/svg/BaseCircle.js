@@ -1,37 +1,35 @@
 import {toggleEdited} from '../../actions/shapes';
 
-export const baseMapState = ({
-    common,
+export const baseMapStateToProps = ({
     shape,
+    common,
     edited,
     shapeName
 }) => {
     var {
         x,
         y,
-        height,
-        width,
+        radius,
         scale
     } = shape, {
         center,
         step
     } = common,
-    scaledX = center.x + x * step,
+        scaledX = center.x + x * step,
         scaledY = center.y - y * step,
-        scaledHeight = height * step,
-        scaledWidth = width * step;
+        scaledRadius = radius * step;
 
     return {
         x: scaledX,
         y: scaledY,
+        radius: scaledRadius,
         scale,
-        height: scaledHeight,
-        width: scaledWidth,
         selected: edited.has(shapeName)
+
     };
 };
 
-export const baseMapProps = (dispatch, shapeName) => {
+export const baseMapDispatchToProps = (dispatch, shapeName) => {
     return {
         toggleEdited: () => {
             dispatch(toggleEdited(shapeName));

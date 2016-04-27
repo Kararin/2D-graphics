@@ -3,6 +3,7 @@ import {
 } from 'react-redux';
 import Base from '../../view/svg/Circle';
 import {toggleEdited} from '../../actions/shapes';
+import {baseMapDispatchToProps, baseMapStateToProps} from './BaseCircle';
 
 const mapStateToProps = ({
     shapes,
@@ -11,33 +12,17 @@ const mapStateToProps = ({
     var {
         rightWheel,
         edited
-    } = shapes, {
-        x,
-        y,
-        radius
-    } = rightWheel, {
-        center,
-        step
-    } = common,
-        scaledX = center.x + x * step,
-        scaledY = center.y - y * step,
-        scaledRadius = radius * step;
+    } = shapes;
 
-    return {
-        x: scaledX,
-        y: scaledY,
-        radius: scaledRadius,
-        selected: edited.has('rightWheel')
-
-    };
+    return baseMapStateToProps({
+        shape: rightWheel,
+        common,
+        edited,
+        shapeName: 'rightWheel'});
 };
 
 const mapPropsToState = (dispatch) => {
-    return {
-        toggleEdited: () => {
-            dispatch(toggleEdited('rightWheel'));
-        }
-    };
+    return baseMapDispatchToProps(dispatch, 'rightWheel');
 };
 
 export default connect(mapStateToProps, mapPropsToState)(Base);

@@ -1,0 +1,60 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+body {
+  background-color: #fafaf7;
+}
+
+.my-canvas {
+  position: absolute;
+  top: 50px;
+  left: 50px;
+  box-shadow: 0 0 5px grey;
+}
+
+$my-buttons-height: 100px;
+$my-buttons-width: 100px;
+
+.my-buttons {
+    position: absolute;
+    top: 50px;
+    left: 50px;
+    width: $my-buttons-height;
+    height: $my-buttons-width;
+
+    & .button-x-right {
+        position: absolute;
+        top: $my-buttons-height / 2 - 10;
+        right: 5px;
+    }
+
+    & .button-x-left {
+        position: absolute;
+        top: $my-buttons-height / 2 - 10;
+        left: 5px;
+    }
+
+    & .button-x-up {
+        position: absolute;
+        top: 5px;
+        left: $my-buttons-width / 2 - 15;
+    }
+
+    & .button-x-down {
+        position: absolute;
+        bottom: 5px;
+        left: $my-buttons-width / 2 - 15;
+    }
+}
+
+.button-x-left {
+    position: absolute;
+    top: 50px;
+    left:100px;
+}
